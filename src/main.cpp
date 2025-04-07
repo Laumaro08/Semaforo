@@ -1,18 +1,36 @@
 #include <Arduino.h>
+int sem1[4][3]={
+                {1,0,0},
+                {1,1,0},
+                {0,0,1},
+                {0,1,0}
+                };
 
-// put function declarations here:
-int myFunction(int, int);
+int sem2[4][3]={
+                  {0,0,1},
+                  {0,1,0},
+                  {1,0,0},
+                  {0,1,0}
+                  };
+
+int pin1[3]={2,3,4};
+
+int pin2[3]={5,6,7};
 
 void setup() {
-  // put your setup code here, to run once:
-  int result = myFunction(2, 3);
+ for(int i=0; i<3; i++){
+    pinMode (pin1[i], OUTPUT);
+    pinMode (pin2[i], OUTPUT);
+ }
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-}
-
-// put function definitions here:
-int myFunction(int x, int y) {
-  return x + y;
+  
+for(int i=0; i<4; i++){
+  for(int c=0; c<3; c++){
+    digitalWrite(pin1[c], sem1[i][c]);
+    digitalWrite(pin2[c], sem2[i][c]);
+    delay(5000);
+  }
+ }
 }
